@@ -13,12 +13,12 @@
 .tableWrap { @apply overflow-x-auto; }
 .table { @apply w-full table-fixed border-collapse; }
 .thead { @apply text-left text-sm text-gray-700; }
-.row { @apply align-top; height:72px; }
-.cell { @apply py-2 pr-3; }
+.row { @apply align-top; height:88px; }
+.cell { @apply py-2 pr-3 align-top; }
 
 .specialtiesCell { max-width:24rem; overflow:hidden; }
-.specialties { @apply flex flex-wrap gap-1; max-height:48px; overflow:hidden; }
-.tag { @apply inline-flex items-center px-2 py-1 text-xs rounded whitespace-nowrap truncate; max-width:12rem; background:#eef4f2; color:#23483f; }
-.moreTag { @apply inline-flex items-center px-2 py-1 text-xs font-medium rounded; background:#d7a13b; color:#1f2a24; }
+.specialties { @apply flex flex-wrap gap-1; align-content:flex-start; max-height:56px; overflow:hidden; padding-bottom:2px; }
+.tag { @apply inline-flex items-center h-6 rounded px-2 text-xs truncate; min-width:0; max-width:100%; background:#eef4f2; color:#23483f; }
+.moreTag { @apply inline-flex items-center h-6 rounded px-2 text-xs font-medium; background:#d7a13b; color:#1f2a24; }
 
 .pager { @apply mt-4 flex items-center gap-2; }

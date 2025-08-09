@@ -48,17 +48,11 @@ export default function Home() {
                 className={styles.input}
                 placeholder="Search advocates..."
                 value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setPage(0);
-                }}
+                onChange={(e) => { setSearchTerm(e.target.value); setPage(0); }}
             />
             <button
                 className={styles.actionBtn}
-                onClick={() => {
-                  setSearchTerm("");
-                  setPage(0);
-                }}
+                onClick={() => { setSearchTerm(""); setPage(0); }}
             >
               Reset
             </button>
@@ -92,9 +86,7 @@ export default function Home() {
               <tbody>
               {filteredAdvocates.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className={styles.meta}>
-                      No advocates found.
-                    </td>
+                    <td colSpan={7} className={styles.meta}>No advocates found.</td>
                   </tr>
               ) : (
                   filteredAdvocates.map((adv) => (
@@ -144,6 +136,5 @@ export default function Home() {
         </main>
       </>
   );
-
 
 }
