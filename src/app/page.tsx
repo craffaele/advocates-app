@@ -36,20 +36,6 @@ export default function Home() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     setSearchTerm(term);
-
-    console.log("filtering advocates...");
-    const filteredAdvocates = advocates.filter((advocate) => {
-      return (
-        advocate.firstName.includes(debounced) ||
-        advocate.lastName.includes(debounced) ||
-        advocate.city.includes(debounced) ||
-        advocate.degree.includes(debounced) ||
-        advocate.specialties.includes(debounced) ||
-        advocate.yearsOfExperience.toString().includes(debounced)
-      );
-    });
-
-    setFilteredAdvocates(filteredAdvocates);
   };
 
   const onClick = () => {
