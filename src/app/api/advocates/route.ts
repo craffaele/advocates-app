@@ -3,7 +3,11 @@ import { advocates } from "../../../db/schema";
 import { ilike, or, sql } from "drizzle-orm";
 
 export async function GET(req: Request) {
-    const search = new URL(req.url).searchParams.get('q')?.trim() ?? '';
+    const p = new URL(req.url).searchParams;
+    const search = p.get("q")?.trim() ?? "";
+    const limit = Math.min(Number(p.get("limit") ?? 50), 100);
+    const offset = Math.max(Number(p.get("offset") ?? 0), 0);
+
     const data = await db.query.advocates.findMany({
         where: search
             ? or(
@@ -15,7 +19,10 @@ export async function GET(req: Request) {
                 sql`CAST(${advocates.yearsOfExperience} AS TEXT) ILIKE ${`%${search}%`}`
             )
             : undefined,
+        limit,
+        offset,
     });
+
     return Response.json({ data });
 }
 
