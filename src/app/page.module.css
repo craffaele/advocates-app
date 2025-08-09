@@ -1,16 +1,24 @@
-.main { @apply m-6 space-y-4; }
-.title { @apply text-2xl font-semibold; }
-.controls { @apply flex gap-2 items-center max-w-xl; }
-.resetBtn { @apply rounded border px-3 py-2 disabled:opacity-50; }
+.banner { @apply w-full mb-6; background:#265b4e; }
+.bannerTitle { @apply mx-auto max-w-5xl px-4 py-4 text-white text-xl md:text-2xl font-semibold; font-family:'Lato',sans-serif; }
+
+.main { @apply mx-auto max-w-5xl space-y-4 px-4; }
+.controls { @apply flex flex-wrap gap-2 items-center; }
 .meta { @apply text-sm text-gray-600; }
 .error { @apply text-sm text-red-600; }
+
+.input { @apply h-10 w-full max-w-md rounded-md border px-4 text-sm focus:outline-none focus:ring-2; border-color:#cbd5e1; }
+.actionBtn { @apply h-10 inline-flex items-center rounded-md px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 disabled:opacity-50; background:#d7a13b; }
+.actionBtn:hover { filter:brightness(0.92); }
+
 .tableWrap { @apply overflow-x-auto; }
-.table { @apply w-full table-auto border-collapse; }
+.table { @apply w-full table-fixed border-collapse; }
 .thead { @apply text-left text-sm text-gray-700; }
-.row { @apply odd:bg-gray-50 hover:bg-gray-100; }
-.specialtiesCell { @apply max-w-xs; }
-.tag { @apply inline-block mr-1 mb-1 rounded bg-gray-100 px-2 py-1 text-xs; }
-.input { @apply h-10 w-full max-w-md rounded-md border px-4 text-sm focus:outline-none focus:ring focus:ring-sky-300; }
-.primaryBtn { @apply h-10 inline-flex items-center rounded-md px-4 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-300 disabled:opacity-50; }
-.secondaryBtn { @apply h-10 inline-flex items-center rounded-md px-4 text-sm font-medium border border-sky-600 text-sky-700 hover:bg-sky-50 focus:outline-none focus:ring focus:ring-sky-300 disabled:opacity-50; }
+.row { @apply align-top; height:72px; }
+.cell { @apply py-2 pr-3; }
+
+.specialtiesCell { max-width:24rem; overflow:hidden; }
+.specialties { @apply flex flex-wrap gap-1; max-height:48px; overflow:hidden; }
+.tag { @apply inline-flex items-center px-2 py-1 text-xs rounded whitespace-nowrap truncate; max-width:12rem; background:#eef4f2; color:#23483f; }
+.moreTag { @apply inline-flex items-center px-2 py-1 text-xs font-medium rounded; background:#d7a13b; color:#1f2a24; }
+
 .pager { @apply mt-4 flex items-center gap-2; }

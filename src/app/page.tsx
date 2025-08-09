@@ -37,68 +37,113 @@ export default function Home() {
   }, [data]);
 
   return (
-      <main className={styles.main}>
-        <h1 className={styles.title}>Solace Advocates</h1>
-
-        <div className={styles.controls}>
-          <input
-              className={styles.input}
-              placeholder="Search advocates..."
-              value={searchTerm}
-              onChange={(e) => { setSearchTerm(e.target.value); setPage(0); }}
-          />
-          <button className={styles.primaryBtn} onClick={() => { setSearchTerm(""); setPage(0); }}>
-            Reset
-          </button>
+      <>
+        <div className={styles.banner}>
+          <h1 className={styles.bannerTitle}>Solace Advocates</h1>
         </div>
 
-        {isError && <p className={styles.error}>Failed to load advocates.</p>}
-        {isFetching && <p className={styles.meta}>Loading...</p>}
+        <main className={styles.main}>
+          <div className={styles.controls}>
+            <input
+                className={styles.input}
+                placeholder="Search advocates..."
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setPage(0);
+                }}
+            />
+            <button
+                className={styles.actionBtn}
+                onClick={() => {
+                  setSearchTerm("");
+                  setPage(0);
+                }}
+            >
+              Reset
+            </button>
+          </div>
 
-        <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <thead className={styles.thead}>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>City</th>
-              <th>Degree</th>
-              <th>Specialties</th>
-              <th>Years of Experience</th>
-              <th>Phone Number</th>
-            </tr>
-            </thead>
-            <tbody>
-            {filteredAdvocates.map((adv) => (
-                <tr key={adv.id} className={styles.row}>
-                  <td>{adv.firstName}</td>
-                  <td>{adv.lastName}</td>
-                  <td>{adv.city}</td>
-                  <td>{adv.degree}</td>
-                  <td className={styles.specialtiesCell}>
-                    {adv.specialties.map((s, i) => (
-                        <div key={i} className={styles.tag}>{s}</div>
-                    ))}
-                  </td>
-                  <td>{adv.yearsOfExperience}</td>
-                  <td>{adv.phoneNumber}</td>
-                </tr>
-            ))}
-            </tbody>
-          </table>
-        </div>
+          {isError && <p className={styles.error}>Failed to load advocates.</p>}
+          {isFetching && <p className={styles.meta}>Loading...</p>}
 
-        <div className={styles.pager}>
-          <button
-              className={styles.primaryBtn}
-              onClick={() => setPage((p) => Math.max(0, p - 1))}
-              disabled={page === 0}>Prev</button>
-          <span>{offset + 1}-{Math.min(offset + LIMIT, data?.total ?? 0)} of {data?.total ?? 0}</span>
-          <button
-              className={styles.primaryBtn}
-              onClick={() => setPage((p) => p + 1)}
-              disabled={offset + LIMIT >= (data?.total ?? 0)}>Next</button>
-        </div>
-      </main>
+          <div className={styles.tableWrap}>
+            <table className={styles.table}>
+              <colgroup>
+                <col style={{ width: "12%" }} />
+                <col style={{ width: "12%" }} />
+                <col style={{ width: "12%" }} />
+                <col style={{ width: "12%" }} />
+                <col style={{ width: "32%" }} />
+                <col style={{ width: "10%" }} />
+                <col style={{ width: "10%" }} />
+              </colgroup>
+              <thead className={styles.thead}>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City</th>
+                <th>Degree</th>
+                <th>Specialties</th>
+                <th>Years of Experience</th>
+                <th>Phone Number</th>
+              </tr>
+              </thead>
+              <tbody>
+              {filteredAdvocates.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className={styles.meta}>
+                      No advocates found.
+                    </td>
+                  </tr>
+              ) : (
+                  filteredAdvocates.map((adv) => (
+                      <tr key={adv.id} className={styles.row}>
+                        <td className={styles.cell}>{adv.firstName}</td>
+                        <td className={styles.cell}>{adv.lastName}</td>
+                        <td className={styles.cell}>{adv.city}</td>
+                        <td className={styles.cell}>{adv.degree}</td>
+                        <td className={styles.specialtiesCell}>
+                          <div className={styles.specialties} title={adv.specialties.join(", ")}>
+                            {adv.specialties.slice(0, 3).map((s, i) => (
+                                <span key={i} className={styles.tag}>{s}</span>
+                            ))}
+                            {adv.specialties.length > 3 && (
+                                <span className={styles.moreTag}>+{adv.specialties.length - 3} more</span>
+                            )}
+                          </div>
+                        </td>
+                        <td className={styles.cell}>{adv.yearsOfExperience}</td>
+                        <td className={styles.cell}>{adv.phoneNumber}</td>
+                      </tr>
+                  ))
+              )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className={styles.pager}>
+            <button
+                className={styles.actionBtn}
+                onClick={() => setPage((p) => Math.max(0, p - 1))}
+                disabled={page === 0}
+            >
+              Prev
+            </button>
+            <span>
+          {offset + 1}-{Math.min(offset + LIMIT, data?.total ?? 0)} of {data?.total ?? 0}
+        </span>
+            <button
+                className={styles.actionBtn}
+                onClick={() => setPage((p) => p + 1)}
+                disabled={offset + LIMIT >= (data?.total ?? 0)}
+            >
+              Next
+            </button>
+          </div>
+        </main>
+      </>
   );
+
+
 }
