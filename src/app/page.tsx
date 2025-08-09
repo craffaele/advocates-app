@@ -1,22 +1,37 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
 
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [debounced, setDebounced] = useState("");
 
   useEffect(() => {
-    console.log("fetching advocates...");
-    fetch("/api/advocates").then((response) => {
-      response.json().then((jsonResponse) => {
-        setAdvocates(jsonResponse.data);
-        setFilteredAdvocates(jsonResponse.data);
-      });
-    });
-  }, []);
+    const id = setTimeout(() => setDebounced(searchTerm), 250);
+    return () => clearTimeout(id);
+  }, [searchTerm]);
+
+  const { data, isFetching, isError } = useQuery({
+    queryKey: ['advocates', debounced],
+    queryFn: async () => {
+      const r = await fetch(`/api/advocates?q=${encodeURIComponent(debounced)}`);
+      if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+      return r.json();
+    },
+    enabled: debounced.trim().length > 0 || debounced === '',
+  });
+
+  useEffect(() => {
+    if (data?.data) {
+      setAdvocates(data.data);
+      setFilteredAdvocates(data.data);
+    }
+  }, [data]);
+
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -25,12 +40,12 @@ export default function Home() {
     console.log("filtering advocates...");
     const filteredAdvocates = advocates.filter((advocate) => {
       return (
-        advocate.firstName.includes(searchTerm) ||
-        advocate.lastName.includes(searchTerm) ||
-        advocate.city.includes(searchTerm) ||
-        advocate.degree.includes(searchTerm) ||
-        advocate.specialties.includes(searchTerm) ||
-        advocate.yearsOfExperience.toString().includes(searchTerm)
+        advocate.firstName.includes(debounced) ||
+        advocate.lastName.includes(debounced) ||
+        advocate.city.includes(debounced) ||
+        advocate.degree.includes(debounced) ||
+        advocate.specialties.includes(debounced) ||
+        advocate.yearsOfExperience.toString().includes(debounced)
       );
     });
 
