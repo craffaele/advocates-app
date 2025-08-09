@@ -5,10 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
 
+  const LIMIT = 50;
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [debounced, setDebounced] = useState("");
+  const [page, setPage] = useState(0);
+  const offset = page * LIMIT; // todo
 
   useEffect(() => {
     const id = setTimeout(() => setDebounced(searchTerm), 250);
