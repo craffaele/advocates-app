@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function Home() {
+
   const [advocates, setAdvocates] = useState([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState([]);
 
@@ -29,7 +30,7 @@ export default function Home() {
         advocate.city.includes(searchTerm) ||
         advocate.degree.includes(searchTerm) ||
         advocate.specialties.includes(searchTerm) ||
-        advocate.yearsOfExperience.includes(searchTerm)
+        advocate.yearsOfExperience.toString().includes(searchTerm)
       );
     });
 
@@ -58,6 +59,7 @@ export default function Home() {
       <br />
       <table>
         <thead>
+        <tr>
           <th>First Name</th>
           <th>Last Name</th>
           <th>City</th>
@@ -65,18 +67,19 @@ export default function Home() {
           <th>Specialties</th>
           <th>Years of Experience</th>
           <th>Phone Number</th>
+        </tr>
         </thead>
         <tbody>
           {filteredAdvocates.map((advocate) => {
             return (
-              <tr>
+              <tr key={advocate.id}>
                 <td>{advocate.firstName}</td>
                 <td>{advocate.lastName}</td>
                 <td>{advocate.city}</td>
                 <td>{advocate.degree}</td>
                 <td>
                   {advocate.specialties.map((s) => (
-                    <div>{s}</div>
+                      <div key={s}>{s}</div>
                   ))}
                 </td>
                 <td>{advocate.yearsOfExperience}</td>
