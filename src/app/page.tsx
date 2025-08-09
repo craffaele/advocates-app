@@ -5,13 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
 
-  const LIMIT = 50;
+  const LIMIT = 7;
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [debounced, setDebounced] = useState("");
   const [page, setPage] = useState(0);
-  const offset = page * LIMIT; // todo
+  const offset = page * LIMIT;
 
   useEffect(() => {
     const id = setTimeout(() => setDebounced(searchTerm), 250);
@@ -21,7 +21,7 @@ export default function Home() {
   const { data, isFetching, isError } = useQuery({
     queryKey: ['advocates', debounced],
     queryFn: async () => {
-      const r = await fetch(`/api/advocates?q=${encodeURIComponent(debounced)}`);
+      const r = await fetch(`/api/advocates?q=${encodeURIComponent(debounced)}&limit=${LIMIT}&offset=${offset}`);
       if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
       return r.json();
     },
