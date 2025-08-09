@@ -4,12 +4,11 @@
 
 .main { @apply mx-auto max-w-5xl space-y-4 px-4; }
 .controls { @apply flex items-center justify-between gap-2 flex-wrap; }
-.controlsLeft { @apply flex items-center gap-2 flex-wrap; }
-.controlsRight { @apply flex items-center gap-2; }
+.controlsLeft { @apply flex items-center gap-2 flex-nowrap flex-1 min-w-0 max-w-2xl; }
+.controlsRight { @apply flex items-center gap-2 flex-none shrink-0; }
+.input { @apply h-10 flex-1 min-w-0 rounded-md border px-4 text-sm focus:outline-none focus:ring-2; border-color:#cbd5e1; }
 .meta { @apply text-sm text-gray-600; }
 .error { @apply text-sm text-red-600; }
-
-.input { @apply h-10 w-full max-w-md rounded-md border px-4 text-sm focus:outline-none focus:ring-2; border-color:#cbd5e1; }
 .actionBtn { @apply h-10 inline-flex items-center rounded-md px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 disabled:opacity-50 shrink-0; background:#d7a13b; }
 .actionBtn:hover { filter:brightness(0.92); }
 
