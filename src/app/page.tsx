@@ -39,7 +39,7 @@ export default function Home() {
   return (
       <div className={styles.page}>
         <div className={styles.banner}>
-          <h1 className={styles.bannerTitle}>Solace Advocates</h1>
+          <h1 className={styles.bannerTitle}>Advocates</h1>
         </div>
 
         <div className={styles.content}>
