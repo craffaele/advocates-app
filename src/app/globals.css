@@ -3,4 +3,9 @@
 @tailwind utilities;
 
 :root { --solace-primary: #265b4e; --solace-secondary: #d7a13b; }
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap');
+html, body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+html, body { height: 100%; overflow: hidden; }
+
+
