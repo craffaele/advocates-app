@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root { --solace-primary: #265b4e; --solace-secondary: #d7a13b; }
-html, body { font-family: Georgia, Cambria, "Times New Roman", Times, serif !important; }
 html, body { height: 100%; overflow: hidden; }
 
 
