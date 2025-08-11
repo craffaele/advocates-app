@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root { --solace-primary: #265b4e; --solace-secondary: #d7a13b; }
+html, body { height: 100%; overflow: hidden; }
+
+
